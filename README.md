@@ -1,4 +1,4 @@
-﻿# Advanced iPhone-Style Calculator
+# Advanced iPhone-Style Calculator
 
 A polished and responsive calculator web app built with HTML, CSS, and JavaScript.
 The interface is inspired by modern mobile calculator design with dark contrast buttons, smooth motion, and clean spacing that looks portfolio-ready.
@@ -7,7 +7,7 @@ The interface is inspired by modern mobile calculator design with dark contrast 
 
 - Basic operations: `+`, `-`, `*`, `/`
 - Decimal support with input validation
-- `C` clear button and `⌫` backspace button
+- `C` clear button and backspace button
 - `=` evaluate button with live output pulse animation
 - Safe expression parser (no `eval()` used)
 - Invalid input prevention (operator handling and decimal checks)
@@ -15,11 +15,11 @@ The interface is inspired by modern mobile calculator design with dark contrast 
 - Previous calculation preview shown above the current expression
 - Dark/light theme toggle
 - Keyboard support:
-  - Numbers: `0-9`
-  - Operators: `+`, `-`, `*`, `/`
-  - Enter/`=` for result
-  - Backspace for delete
-  - Escape/`C`/Delete for clear
+- Numbers: `0-9`
+- Operators: `+`, `-`, `*`, `/`
+- Enter/`=` for result
+- Backspace for delete
+- Escape/`C`/Delete for clear
 - Fully responsive layout for desktop and mobile
 
 ## Technologies Used

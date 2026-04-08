@@ -1,0 +1,309 @@
+﻿:root {
+  --bg-gradient: radial-gradient(circle at 14% 8%, #31374a 0%, #101218 40%, #07080b 100%);
+  --panel-bg: linear-gradient(160deg, #1a1d27 0%, #10131b 100%);
+  --panel-border: rgba(255, 255, 255, 0.08);
+  --display-bg: rgba(6, 8, 12, 0.78);
+  --text-primary: #f4f6fb;
+  --text-secondary: #9ea7c0;
+  --number-bg: #2a2f3d;
+  --number-hover: #353c4d;
+  --action-bg: #a6acbd;
+  --action-text: #141821;
+  --operator-bg: #ff9f0a;
+  --operator-hover: #ffad33;
+  --operator-text: #ffffff;
+  --equals-bg: linear-gradient(165deg, #ffaf2f 0%, #ff8800 100%);
+  --focus-ring: 0 0 0 3px rgba(255, 159, 10, 0.28);
+  --shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+  --button-shadow: 0 12px 18px rgba(4, 6, 10, 0.35);
+}
+
+body.light {
+  --bg-gradient: radial-gradient(circle at 15% 0%, #d7e2ff 0%, #f0f4ff 48%, #e9f5ff 100%);
+  --panel-bg: linear-gradient(160deg, #ffffff 0%, #eef4ff 100%);
+  --panel-border: rgba(116, 138, 184, 0.18);
+  --display-bg: rgba(232, 239, 252, 0.95);
+  --text-primary: #101725;
+  --text-secondary: #56607a;
+  --number-bg: #d7e1f5;
+  --number-hover: #c9d7f4;
+  --action-bg: #bfc8da;
+  --action-text: #1e2536;
+  --operator-bg: #ff9f0a;
+  --operator-hover: #ffad33;
+  --operator-text: #ffffff;
+  --equals-bg: linear-gradient(165deg, #ffb53d 0%, #ff8f00 100%);
+  --focus-ring: 0 0 0 3px rgba(255, 143, 0, 0.2);
+  --shadow: 0 24px 55px rgba(45, 63, 99, 0.25);
+  --button-shadow: 0 10px 18px rgba(87, 111, 157, 0.24);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: "Outfit", sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  transition: background 0.35s ease;
+  overflow: hidden;
+}
+
+.ambient {
+  position: fixed;
+  width: 320px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(14px);
+  pointer-events: none;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.ambient-left {
+  top: -110px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(255, 160, 31, 0.8), rgba(255, 148, 7, 0.1));
+  animation: drift 8s ease-in-out infinite;
+}
+
+.ambient-right {
+  right: -130px;
+  bottom: -130px;
+  background: radial-gradient(circle, rgba(90, 110, 255, 0.7), rgba(31, 45, 79, 0.05));
+  animation: drift 10s ease-in-out infinite reverse;
+}
+
+.app-shell {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 390px);
+}
+
+.calculator {
+  padding: 1.05rem;
+  border-radius: 2.1rem;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
+  animation: rise-in 0.5s ease;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0.8rem;
+  padding-inline: 0.2rem;
+}
+
+.theme-toggle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--number-bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: var(--button-shadow);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px) scale(1.04);
+  filter: brightness(1.07);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-toggle:focus-visible,
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--button-shadow), var(--focus-ring);
+}
+
+.display {
+  min-height: 120px;
+  padding: 0.95rem 1rem;
+  margin-bottom: 0.95rem;
+  border-radius: 1.45rem;
+  background: var(--display-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.24rem;
+}
+
+.display-history,
+.display-input,
+.display-output {
+  margin: 0;
+  text-align: right;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.display-history {
+  min-height: 1rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.95;
+}
+
+.display-input {
+  min-height: 1.35rem;
+  font-size: 1.08rem;
+  color: var(--text-secondary);
+}
+
+.display-output {
+  min-height: 2.4rem;
+  font-size: clamp(2rem, 5.8vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.display-output.pulse {
+  animation: pulse 0.24s ease;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.62rem;
+}
+
+.btn {
+  min-height: 66px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--number-bg);
+  box-shadow: var(--button-shadow);
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.18s ease, filter 0.18s ease;
+}
+
+.btn:hover {
+  background: var(--number-hover);
+  transform: translateY(-1px);
+}
+
+.btn:active,
+.btn.btn-pressed {
+  transform: scale(0.95);
+  filter: brightness(1.03);
+}
+
+.btn-action {
+  background: var(--action-bg);
+  color: var(--action-text);
+}
+
+.btn-operator,
+.btn-equals {
+  background: var(--operator-bg);
+  color: var(--operator-text);
+}
+
+.btn-operator:hover,
+.btn-equals:hover {
+  background: var(--operator-hover);
+}
+
+.btn-equals {
+  background: var(--equals-bg);
+  font-size: 1.55rem;
+  grid-row: span 2;
+}
+
+.btn-zero {
+  grid-column: span 2;
+  text-align: left;
+  padding-left: 1.45rem;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.97);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(16px) scale(1.04);
+  }
+}
+
+@media (max-width: 420px) {
+  .calculator {
+    padding: 0.85rem;
+    border-radius: 1.85rem;
+  }
+
+  .btn {
+    min-height: 60px;
+    font-size: 1.3rem;
+  }
+
+  .display {
+    min-height: 110px;
+    padding: 0.8rem;
+  }
+
+  .display-output {
+    min-height: 2.1rem;
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+  }
+}
+
+@media (max-width: 340px) {
+  .button-grid {
+    gap: 0.5rem;
+  }
+
+  .btn {
+    min-height: 54px;
+    font-size: 1.18rem;
+  }
+
+  .btn-zero {
+    padding-left: 1.15rem;
+  }
+}

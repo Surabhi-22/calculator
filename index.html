@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced Portfolio Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-left" aria-hidden="true"></div>
+    <div class="ambient ambient-right" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <section class="calculator" aria-label="Calculator">
+        <header class="top-bar">
+          <button
+            id="theme-toggle"
+            class="theme-toggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            title="Toggle dark mode"
+          >
+            <span id="theme-icon" aria-hidden="true">&#127769;</span>
+          </button>
+        </header>
+
+        <div class="display" role="status" aria-live="polite">
+          <p id="display-history" class="display-history"></p>
+          <p id="display-input" class="display-input">0</p>
+          <p id="display-output" class="display-output">0</p>
+        </div>
+
+        <div class="button-grid" role="group" aria-label="Calculator buttons">
+          <button type="button" class="btn btn-action" data-action="clear">C</button>
+          <button type="button" class="btn btn-action" data-action="backspace">&#9003;</button>
+          <button type="button" class="btn btn-operator" data-value="/">&divide;</button>
+          <button type="button" class="btn btn-operator" data-value="*">&times;</button>
+
+          <button type="button" class="btn" data-value="7">7</button>
+          <button type="button" class="btn" data-value="8">8</button>
+          <button type="button" class="btn" data-value="9">9</button>
+          <button type="button" class="btn btn-operator" data-value="-">-</button>
+
+          <button type="button" class="btn" data-value="4">4</button>
+          <button type="button" class="btn" data-value="5">5</button>
+          <button type="button" class="btn" data-value="6">6</button>
+          <button type="button" class="btn btn-operator" data-value="+">+</button>
+
+          <button type="button" class="btn" data-value="1">1</button>
+          <button type="button" class="btn" data-value="2">2</button>
+          <button type="button" class="btn" data-value="3">3</button>
+          <button type="button" class="btn btn-equals" data-action="equals">=</button>
+
+          <button type="button" class="btn btn-zero" data-value="0">0</button>
+          <button type="button" class="btn" data-value=".">.</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
